@@ -6,15 +6,15 @@ import com.example.proyect.databinding.ActivityAddBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+
 private lateinit var binding: ActivityAddBinding
-
-
 
 class AddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val bundle = intent.extras
         val email = bundle?.getString("email")
 
@@ -24,7 +24,9 @@ class AddActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     private fun action (email: String) {
 
-        title = "Gestionar citas "
+        title = "Gestionar citas"
+
+        binding.emailTextView.text = email
 
         binding.logOutButton.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
@@ -38,9 +40,6 @@ class AddActivity : AppCompatActivity() {
             db.collection("users").document(email).collection("pacientes").document(nombre).set(
                 hashMapOf(
 
-
-                    //"name" to "Angel",
-                    //"age" to 40
                      "nombre" to binding.nameTextView.text.toString(),
                      "edad" to binding.edadTextView.text.toString(),
                      "cita" to binding.citaTextView.text.toString(),
@@ -48,14 +47,14 @@ class AddActivity : AppCompatActivity() {
                      "cita2" to binding.cita2TextView.text.toString(),
                      "hospital2" to binding.hospital2TextView.text.toString()
                 )
-                        )
-
+            )
 
         }
         binding.getButton.setOnClickListener {
             val nombre= binding.nameTextView.text.toString() //le paso el nombre del paciente al nombre del documento
-
-            db.collection("users").document(email).collection("pacientes").document(nombre)
+            db.collection("users")
+                .document(email).collection("pacientes")
+                .document(nombre)
                 .get().addOnSuccessListener {
 
                 binding.nameTextView.setText(it.get("nombre") as String?)
@@ -66,14 +65,15 @@ class AddActivity : AppCompatActivity() {
                 binding.hospital2TextView.setText(it.get("hospital2") as String?)
 
 
-
-
-
             }
 
         }
         binding.deleteButton.setOnClickListener {
-            db.collection("users").document(email).delete()
+            val nombre= binding.nameTextView.text.toString() //le paso el nombre del paciente al nombre del documento
+            db.collection("users")
+                .document(email)
+                .collection("pacientes")
+                .document(nombre).delete()
         }
     }
 
