@@ -7,9 +7,19 @@
     tools:context=".AuthActivity">
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/addButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        android:layout_margin="15dp"/>
+
     <Button
         android:id="@+id/logOutButton"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
         android:layout_marginTop="17dp"
@@ -21,14 +31,15 @@
 
     <Button
         android:id="@+id/addButton"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
         android:layout_marginEnd="9dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="100dp"
         android:text="Añadir familiares"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
@@ -49,27 +60,27 @@
             android:layout_height="40dp"
             android:text="Email" />
 
-        <Space
+        <!--<Space
             android:layout_width="match_parent"
             android:layout_height="16dp" />
 
-        <TextView
+        &lt;!&ndash;<TextView
             android:id="@+id/providerTextView"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="proveedor" />
+            android:text="proveedor" />&ndash;&gt;
 
-        <Space
+        &lt;!&ndash;<Space
             android:layout_width="match_parent"
-            android:layout_height="16dp" />
+            android:layout_height="16dp" />&ndash;&gt;-->
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </LinearLayout>
 

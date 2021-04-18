@@ -32,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
         title = "Pacientes"
 
         binding.emailTextView.text = email
-        binding.providerTextView.text = provider
+        //binding.providerTextView.text = provider //quitar
 
         binding.logOutButton.setOnClickListener {
 
