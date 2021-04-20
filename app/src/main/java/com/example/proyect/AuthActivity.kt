@@ -3,9 +3,11 @@ package com.example.proyect
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.example.proyect.databinding.ActivityAuthBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 private lateinit var binding: ActivityAuthBinding
 
@@ -55,6 +57,7 @@ class AuthActivity : AppCompatActivity() {
                     ).addOnCompleteListener {
 
                         if (it.isSuccessful) {
+
                             showHome(it.result?.user?.email ?: "", ProviderType.CORREO)
                         } else {
                             showAlert()
@@ -91,10 +94,31 @@ class AuthActivity : AppCompatActivity() {
 
     private fun showHome(email: String, provider: ProviderType) {
 
-        //cambio de la MainActivity a la AddActivity
+       //bucle para leer de la BBDD y alimentar recycler
+        val db = FirebaseFirestore.getInstance()
+        db.collection("users")
+            .document(email)
+            .collection("pacientes")
+            .document()
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+
+                    "${document.nombre} => ${document.data}"
+
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
+
         val homeIntent = Intent(this, HomeActivity::class.java).apply {
             putExtra("email", email)
             putExtra("provider", provider.name)
+
+
+
         }
         startActivity(homeIntent)
     }
