@@ -3,10 +3,12 @@ package com.example.proyect
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyect.databinding.ActivityHomeBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 enum class ProviderType {
     CORREO
@@ -20,6 +22,31 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate (layoutInflater)
         setContentView(binding.root)
+
+        val bundle = intent.extras
+        val email = bundle?.getString("email")
+        val provider = bundle?.getString("provider")
+
+        //bucle para leer de la BBDD y alimentar recycler
+        val db = FirebaseFirestore.getInstance()
+        if (email != null) {
+            db.collection("users")
+                    .document(email) //no sé xq da error
+                    .collection("pacientes")
+                    .document()
+                    .get()
+                    .addOnSuccessListener { result ->
+                        for (document in result) {
+
+                            "${document.nombre} => ${document.data}"
+
+                            Log.d(TAG, "${document.id} => ${document.data}")
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.w(TAG, "Error getting documents.", exception)
+                    }
+        }
 
         //recycler
         val recyclerView: RecyclerView = binding.recyclerView
@@ -37,9 +64,7 @@ class HomeActivity : AppCompatActivity() {
 
 
         //setup
-        val bundle = intent.extras
-        val email = bundle?.getString("email")
-        val provider = bundle?.getString("provider")
+
         setup(email ?: "", provider ?: "")
     }
 

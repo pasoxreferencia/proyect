@@ -94,24 +94,7 @@ class AuthActivity : AppCompatActivity() {
 
     private fun showHome(email: String, provider: ProviderType) {
 
-       //bucle para leer de la BBDD y alimentar recycler
-        val db = FirebaseFirestore.getInstance()
-        db.collection("users")
-            .document(email)
-            .collection("pacientes")
-            .document()
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
 
-                    "${document.nombre} => ${document.data}"
-
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
-            }
 
         val homeIntent = Intent(this, HomeActivity::class.java).apply {
             putExtra("email", email)

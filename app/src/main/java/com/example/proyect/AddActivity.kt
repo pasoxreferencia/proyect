@@ -61,8 +61,9 @@ class AddActivity : AppCompatActivity() {
         }
         binding.getButton.setOnClickListener {
             val nombre= binding.nameTextView.text.toString() //le paso el nombre del paciente al nombre del documento
-            val TAG = "Mensajes"
-
+            val TAG = getString(R.string.mensajes)
+            
+            
                 db.collection("users")
                         .document(email).collection("pacientes")
                         .document(nombre)
