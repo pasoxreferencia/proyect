@@ -18,8 +18,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate (layoutInflater)
         setContentView(binding.root)
-
-        //setup
+        
 
         val bundle = intent.extras
         val email = bundle?.getString("email")

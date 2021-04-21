@@ -24,7 +24,7 @@ class AddActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     private fun action (email: String) {
 
-        title = "Gestionar citas"
+        title = getString(R.string.gestionar_citas)
 
         binding.emailTextView.text = email
 
