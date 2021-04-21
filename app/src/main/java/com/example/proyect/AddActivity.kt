@@ -61,9 +61,9 @@ class AddActivity : AppCompatActivity() {
         }
         binding.getButton.setOnClickListener {
             val nombre= binding.nameTextView.text.toString() //le paso el nombre del paciente al nombre del documento
-            val TAG = "Mensajes"
-
-            if (nombre != null) {
+            val TAG = getString(R.string.mensajes)
+            
+            
                 db.collection("users")
                         .document(email).collection("pacientes")
                         .document(nombre)
@@ -78,9 +78,9 @@ class AddActivity : AppCompatActivity() {
                             binding.hospital2TextView.setText(it.get("hospital2") as String?)
 
                         }
-            }
-                        else {Log.d(TAG, "Introduce nombre de paciente")}
-                }
+                        }
+
+
 
         binding.deleteButton.setOnClickListener {
             val nombre= binding.nameTextView.text.toString() //le paso el nombre del paciente al nombre del documento
