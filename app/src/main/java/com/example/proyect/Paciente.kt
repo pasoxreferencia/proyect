@@ -2,5 +2,4 @@ package com.example.proyect
 
 data class Paciente(
         var name: String,
-        var age: Int,
-        var thumbnail: Int)
+        var age: String)

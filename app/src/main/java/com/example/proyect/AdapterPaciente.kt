@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.bumptech.glide.Glide
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyect.databinding.ContentItemBinding
 
@@ -26,7 +25,7 @@ class AdapterPaciente(var list: ArrayList<Paciente>): RecyclerView.Adapter<Adapt
             title.text = data.name
             count.text = data.age.toString()
 
-            Glide.with(itemView.context).load(data.thumbnail).into(thumbnail)
+  //          Glide.with(itemView.context).load(data.thumbnail).into(thumbnail)
 
             itemView.setOnClickListener {
 

@@ -24,7 +24,7 @@ class AddActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     private fun action (email: String) {
 
-        title = getString(R.string.gestionar_citas)
+        title = "Gestionar citas"
 
         binding.emailTextView.text = email
 
@@ -37,7 +37,8 @@ class AddActivity : AppCompatActivity() {
 
             val nombre= binding.nameTextView.text.toString() //le paso el nombre del paciente al nombre del documento
 
-            db.collection("users").document(email).collection("pacientes").document(nombre).set(
+
+            db.collection(email).document(Math.random().toString()).set(
                 hashMapOf(
 
                      "nombre" to binding.nameTextView.text.toString(),
@@ -50,6 +51,9 @@ class AddActivity : AppCompatActivity() {
 
                 )
             )
+                    .addOnSuccessListener {
+                        Log.d("dentro save botton", "registro completo")
+                    }
                         //vaciar los textView
                         binding.nameTextView.setText("")
                         binding.edadTextView.setText("")
@@ -64,7 +68,7 @@ class AddActivity : AppCompatActivity() {
             val TAG = getString(R.string.mensajes)
             
             
-                db.collection("users")
+                db.collection(email)
                         .document(email).collection("pacientes")
                         .document(nombre)
                         .get().addOnSuccessListener {

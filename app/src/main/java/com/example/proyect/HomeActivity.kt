@@ -20,45 +20,47 @@ private lateinit var binding: ActivityHomeBinding
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate (layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val bundle = intent.extras
         val email = bundle?.getString("email")
         val provider = bundle?.getString("provider")
-
+        val lista = ArrayList<Paciente>()
         //bucle para leer de la BBDD y alimentar recycler
         val db = FirebaseFirestore.getInstance()
-        if (email != null) {
-            db.collection("users")
-                    .document(email) //no sé xq da error
-                    .collection("pacientes")
-                    .document()
-                    .get()
-                    .addOnSuccessListener { result ->
-                        for (document in result) {
+        db.collection(email.toString())
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        Log.d("TAG", "${document.id} => ${document.data}")
+                        var paciente = Paciente(
+                                document.getString("nombre").toString(),
+                                document.getString("edad").toString()
+                        )
+                        lista.add(paciente)
 
-                            "${document.nombre} => ${document.data}"
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w("TAG", "Error getting documents.", exception)
+                }
 
-                            Log.d(TAG, "${document.id} => ${document.data}")
-                        }
-                    }
-                    .addOnFailureListener { exception ->
-                        Log.w(TAG, "Error getting documents.", exception)
-                    }
-        }
+                lista.forEach{
+                    Log.d("TAG", "${it.age}  ${it.name}}")
+                }
 
         //recycler
         val recyclerView: RecyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val pacientes = ArrayList<Paciente>()
+     //   val pacientes = ArrayList<Paciente>()
 
         //Aquí iría n los datos leídos de Firestore
-       /* pacientes.add(Paciente("Ayla", age = 0, R.drawable.foto1))
-        pacientes.add(Paciente("Martin", age = 5, R.drawable.foto2))
-        pacientes.add(Paciente("Belen", age = 39, R.drawable.foto3))*/
+        /* pacientes.add(Paciente("Ayla", age = 0, R.drawable.foto1))
+         pacientes.add(Paciente("Martin", age = 5, R.drawable.foto2))
+         pacientes.add(Paciente("Belen", age = 39, R.drawable.foto3))*/
 
-        val adapter = AdapterPaciente(pacientes)
+        val adapter = AdapterPaciente(lista)
 
         recyclerView.adapter = adapter
 
@@ -68,7 +70,7 @@ class HomeActivity : AppCompatActivity() {
         setup(email ?: "", provider ?: "")
     }
 
-    private fun setup (email:String, provider: String) {
+    private fun setup(email: String, provider: String) {
 
         title = "Pacientes"
 

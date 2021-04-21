@@ -33,6 +33,7 @@ class AuthActivity : AppCompatActivity() {
                     ).addOnCompleteListener {
 
                         if (it.isSuccessful) {
+                            val db = FirebaseFirestore.getInstance()
                             showHome(it.result?.user?.email ?: "", ProviderType.CORREO)
                         } else {
                             showAlert()
