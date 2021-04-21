@@ -38,7 +38,7 @@ class AddActivity : AppCompatActivity() {
             val nombre= binding.nameTextView.text.toString() //le paso el nombre del paciente al nombre del documento
 
 
-            db.collection(email).document(Math.random().toString()).set(
+            db.collection(email).document(nombre).set(
                 hashMapOf(
 
                      "nombre" to binding.nameTextView.text.toString(),
@@ -69,7 +69,6 @@ class AddActivity : AppCompatActivity() {
             
             
                 db.collection(email)
-                        .document(email).collection("pacientes")
                         .document(nombre)
                         .get().addOnSuccessListener {
 
@@ -89,10 +88,8 @@ class AddActivity : AppCompatActivity() {
         binding.deleteButton.setOnClickListener {
             val nombre= binding.nameTextView.text.toString() //le paso el nombre del paciente al nombre del documento
 
-            db.collection("users")
-                .document(email)
-                .collection("pacientes")
-                .document(nombre).delete()
+            db.collection(email)
+                    .document(nombre).delete()
         }
     }
 

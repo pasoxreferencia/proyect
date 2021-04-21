@@ -9,6 +9,55 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyect.databinding.ContentItemBinding
 
+
+class AdapterPaciente : RecyclerView.Adapter<AdapterPaciente.ViewHolder>() {
+
+    val lista = mutableListOf<Paciente>()
+
+    fun AdapterPaciente(lista: List<Paciente>) {
+        this.lista.addAll(lista)
+    }
+
+    class ViewHolder(val binding: ContentItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        fun enlazar(paciente: Paciente) {
+
+            binding.txtTitle.text = paciente.name
+            binding.txtCount.text = paciente.age
+
+        }
+
+        companion object {
+
+            fun crear(parent: ViewGroup): ViewHolder {
+
+                val inflater = LayoutInflater.from(parent.context)
+                val binding = ContentItemBinding.inflate(inflater, parent, false)
+                return ViewHolder(binding)
+
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterPaciente.ViewHolder {
+        return ViewHolder.crear(parent)
+    }
+
+    override fun onBindViewHolder(holder: AdapterPaciente.ViewHolder, position: Int) {
+        holder.enlazar(lista[position])
+    }
+
+    override fun getItemCount(): Int {
+        return lista.size
+    }
+
+
+}
+
+
+
+
+/*
 private lateinit var binding: ContentItemBinding
 class AdapterPaciente(var list: ArrayList<Paciente>): RecyclerView.Adapter<AdapterPaciente.ViewHolder>() {
 
@@ -29,7 +78,8 @@ class AdapterPaciente(var list: ArrayList<Paciente>): RecyclerView.Adapter<Adapt
 
             itemView.setOnClickListener {
 
-                Toast.makeText(itemView.context, "Perfil de ${data.name}", Toast.LENGTH_LONG).show()
+                //Toast.makeText(itemView.context, "Perfil de ${data.name}", Toast.LENGTH_LONG).show()
+
             }
         }
     }
@@ -48,4 +98,4 @@ class AdapterPaciente(var list: ArrayList<Paciente>): RecyclerView.Adapter<Adapt
 
         return list.size
     }
-}
+}*/

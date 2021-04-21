@@ -35,8 +35,8 @@ class HomeActivity : AppCompatActivity() {
                     for (document in result) {
                         Log.d("TAG", "${document.id} => ${document.data}")
                         var paciente = Paciente(
-                                document.getString("nombre").toString(),
-                                document.getString("edad").toString()
+                                document.getString("Name").toString(),
+                                document.getString("Edad").toString()
                         )
                         lista.add(paciente)
 
@@ -53,14 +53,8 @@ class HomeActivity : AppCompatActivity() {
         //recycler
         val recyclerView: RecyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-     //   val pacientes = ArrayList<Paciente>()
 
-        //Aquí iría n los datos leídos de Firestore
-        /* pacientes.add(Paciente("Ayla", age = 0, R.drawable.foto1))
-         pacientes.add(Paciente("Martin", age = 5, R.drawable.foto2))
-         pacientes.add(Paciente("Belen", age = 39, R.drawable.foto3))*/
-
-        val adapter = AdapterPaciente(lista)
+        val adapter = AdapterPaciente()
 
         recyclerView.adapter = adapter
 
@@ -79,6 +73,8 @@ class HomeActivity : AppCompatActivity() {
 
         binding.logOutButton.setOnClickListener {
 
+
+            //actualizar BBDD
             FirebaseAuth.getInstance().signOut()
             onBackPressed()
         }
