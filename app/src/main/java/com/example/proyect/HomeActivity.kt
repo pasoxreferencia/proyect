@@ -94,7 +94,10 @@ class HomeActivity : AppCompatActivity() {
     fun CreaRV(lista:ArrayList<Paciente>){
         recyclerView=binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        var adapter = AdapterPaciente(lista)
+        var adapter = AdapterPaciente(lista){
+            val intent=Intent(this, MuestraDatos::class.java)
+            startActivity(intent)
+        }
         recyclerView.adapter = adapter
 
 

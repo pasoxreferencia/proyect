@@ -59,7 +59,7 @@ class AdapterPaciente : RecyclerView.Adapter<AdapterPaciente.ViewHolder>() {
 
 private lateinit var binding: ContentItemBinding
 
-class AdapterPaciente(var list: ArrayList<Paciente>) : RecyclerView.Adapter<AdapterPaciente.ViewHolder>() {
+class AdapterPaciente(var list: ArrayList<Paciente>, val listener:(Paciente)->Unit) : RecyclerView.Adapter<AdapterPaciente.ViewHolder>() {
 
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view),View.OnClickListener {
@@ -88,6 +88,11 @@ class AdapterPaciente(var list: ArrayList<Paciente>) : RecyclerView.Adapter<Adap
 
         holder.title.text= list[position].name
         holder.count.text=list[position].age
+
+        val item= list[position]
+        holder.itemView.setOnClickListener{
+            listener(item)
+        }
     }
 
     override fun getItemCount(): Int {
