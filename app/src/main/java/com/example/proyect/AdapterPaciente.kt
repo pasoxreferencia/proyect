@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyect.databinding.ContentItemBinding
 
 
+/*
 class AdapterPaciente : RecyclerView.Adapter<AdapterPaciente.ViewHolder>() {
 
     val lista = mutableListOf<Paciente>()
@@ -39,11 +40,11 @@ class AdapterPaciente : RecyclerView.Adapter<AdapterPaciente.ViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterPaciente.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.crear(parent)
     }
 
-    override fun onBindViewHolder(holder: AdapterPaciente.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.enlazar(lista[position])
     }
 
@@ -53,49 +54,44 @@ class AdapterPaciente : RecyclerView.Adapter<AdapterPaciente.ViewHolder>() {
 
 
 }
+*/
 
 
-
-
-/*
 private lateinit var binding: ContentItemBinding
-class AdapterPaciente(var list: ArrayList<Paciente>): RecyclerView.Adapter<AdapterPaciente.ViewHolder>() {
+
+class AdapterPaciente(var list: ArrayList<Paciente>) : RecyclerView.Adapter<AdapterPaciente.ViewHolder>() {
 
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view),View.OnClickListener {
+        var title: TextView
+        var count: TextView
 
 
-        fun bindItems(data: Paciente) {
+        init {
+            title=view.findViewById(R.id.txtTitle)
+            count=view.findViewById(R.id.txtCount)
+        }
 
-            val title: TextView = itemView.findViewById(R.id.txtTitle)
-            val count: TextView = itemView.findViewById(R.id.txtCount)
-            val thumbnail: ImageView = itemView.findViewById(R.id.thumbnail)
+        override fun onClick(v: View?) {
 
-            title.text = data.name
-            count.text = data.age.toString()
 
-  //          Glide.with(itemView.context).load(data.thumbnail).into(thumbnail)
-
-            itemView.setOnClickListener {
-
-                //Toast.makeText(itemView.context, "Perfil de ${data.name}", Toast.LENGTH_LONG).show()
-
-            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v= LayoutInflater.from(parent.context).inflate(R.layout.content_item,parent,false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.content_item, parent, false)
 
         return ViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: AdapterPaciente.ViewHolder, position: Int) {
-        holder.bindItems(list[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        holder.title.text= list[position].name
+        holder.count.text=list[position].age
     }
 
     override fun getItemCount(): Int {
 
         return list.size
     }
-}*/
+}

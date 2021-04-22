@@ -49,6 +49,7 @@ class AuthActivity : AppCompatActivity() {
         }
 
         binding.loginButton.setOnClickListener {
+
             if (binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty()) {
 
                 FirebaseAuth.getInstance()

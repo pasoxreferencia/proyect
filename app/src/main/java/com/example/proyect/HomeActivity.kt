@@ -15,9 +15,12 @@ enum class ProviderType {
     //SE SEGUIRÁN AÑADIENDO PROVEEDORES
 }
 
-private lateinit var binding: ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityHomeBinding
+    lateinit var lista: ArrayList<Paciente>
+    lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -26,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
         val bundle = intent.extras
         val email = bundle?.getString("email")
         val provider = bundle?.getString("provider")
-        val lista = ArrayList<Paciente>()
+        lista = ArrayList()
         //bucle para leer de la BBDD y alimentar recycler
         val db = FirebaseFirestore.getInstance()
         db.collection(email.toString())
@@ -35,33 +38,31 @@ class HomeActivity : AppCompatActivity() {
                     for (document in result) {
                         Log.d("TAG", "${document.id} => ${document.data}")
                         var paciente = Paciente(
-                                document.getString("Name").toString(),
-                                document.getString("Edad").toString()
+                                document.getString("nombre").toString(),
+                                document.getString("edad").toString()
                         )
                         lista.add(paciente)
 
+                    }
+                    lista.forEach {
+                        Log.d("DATOS Lista", "${it.age}  ${it.name}}")
                     }
                 }
                 .addOnFailureListener { exception ->
                     Log.w("TAG", "Error getting documents.", exception)
                 }
 
-                lista.forEach{
-                    Log.d("TAG", "${it.age}  ${it.name}}")
-                }
 
         //recycler
-        val recyclerView: RecyclerView = binding.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        val adapter = AdapterPaciente()
-
-        recyclerView.adapter = adapter
-
+        CreaRV(lista)
 
         //setup
 
         setup(email ?: "", provider ?: "")
+
+        binding.actualizar.setOnClickListener {
+            CreaRV(lista)
+        }
     }
 
     private fun setup(email: String, provider: String) {
@@ -87,6 +88,16 @@ class HomeActivity : AppCompatActivity() {
             }
             startActivity(AddIntent)
         }
+
+
+    }
+    fun CreaRV(lista:ArrayList<Paciente>){
+        recyclerView=binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        var adapter = AdapterPaciente(lista)
+        recyclerView.adapter = adapter
+
+
 
     }
 }
