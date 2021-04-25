@@ -9,9 +9,10 @@ import com.example.proyect.databinding.ActivityAuthBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-private lateinit var binding: ActivityAuthBinding
+
 
 class AuthActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAuthBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Proyect</string>
     <string name="mensajes">Mensajes</string>
+    <string name="a_adir_familiares">Añadir familiares</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="email">Email</string>
 </resources>

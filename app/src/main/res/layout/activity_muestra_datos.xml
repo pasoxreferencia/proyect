@@ -4,6 +4,130 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo4"
     tools:context=".MuestraDatos">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NOMBRE PACIENTE"
+            android:textSize="18dp"
+            android:backgroundTint="#17215E"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:id="@+id/nombrervTextview"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="NOMBRE "
+            android:backgroundTint="#212C73"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <TextView
+            android:id="@+id/cita1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CITA 1"
+            android:textSize="18dp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:id="@+id/primeracita"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Primera citación "
+            android:backgroundTint="#212C73"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <TextView
+            android:id="@+id/hospitalcita1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HOSPITAL CITA 1"
+            android:textSize="18dp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:id="@+id/hospital"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="HOSPITAL "
+            android:backgroundTint="#212C73"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <TextView
+            android:id="@+id/cita2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CITA 2"
+            android:textSize="18dp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:id="@+id/segundacita"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Segunda citación "
+            android:backgroundTint="#212C73"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <TextView
+            android:id="@+id/hospitalcita2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HOSPITAL CITA 2"
+            android:textSize="18dp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:id="@+id/hospital2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="HOSPITAL "
+            android:backgroundTint="#212C73"/>
+
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

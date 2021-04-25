@@ -18,8 +18,8 @@ enum class ProviderType {
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-    lateinit var lista: ArrayList<Paciente>
-    lateinit var recyclerView: RecyclerView
+    private lateinit var lista: ArrayList<Paciente>
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,33 +39,31 @@ class HomeActivity : AppCompatActivity() {
                         Log.d("TAG", "${document.id} => ${document.data}")
                         var paciente = Paciente(
                                 document.getString("nombre").toString(),
-                                document.getString("edad").toString()
+                                document.getString("edad").toString(),
+                                document.getString("cita").toString(),
+                                document.getString("hospital").toString(),
+                                document.getString("cita2").toString(),
+                                document.getString("hospital2").toString()
                         )
                         lista.add(paciente)
+                    }
 
-                    }
-                    lista.forEach {
-                        Log.d("DATOS Lista", "${it.age}  ${it.name}}")
-                    }
                 }
                 .addOnFailureListener { exception ->
                     Log.w("TAG", "Error getting documents.", exception)
                 }
 
-
         //recycler
         CreaRV(lista)
 
-        //setup
-
-        setup(email ?: "", provider ?: "")
+        add(email ?: "", provider ?: "")
 
         binding.actualizar.setOnClickListener {
             CreaRV(lista)
         }
     }
 
-    private fun setup(email: String, provider: String) {
+    private fun add(email: String, provider: String) {
 
         title = "Pacientes"
 
@@ -74,10 +72,10 @@ class HomeActivity : AppCompatActivity() {
 
         binding.logOutButton.setOnClickListener {
 
-
             //actualizar BBDD
             FirebaseAuth.getInstance().signOut()
             onBackPressed()
+
         }
 
         binding.addButton.setOnClickListener {
@@ -87,19 +85,50 @@ class HomeActivity : AppCompatActivity() {
 
             }
             startActivity(AddIntent)
+            finish()
         }
 
 
     }
-    fun CreaRV(lista:ArrayList<Paciente>){
-        recyclerView=binding.recyclerView
+
+    fun CreaRV(lista: ArrayList<Paciente>) {
+        recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        var adapter = AdapterPaciente(lista){
-            val intent=Intent(this, MuestraDatos::class.java)
+
+        var adapter = AdapterPaciente(lista) {
+
+            lista.forEach {
+                Log.d("DATOS Lista", "${it.age}  ${it.name}}")
+            }
+
+            val intent = Intent(this, MuestraDatos::class.java).apply {
+
+                /*       putStringArrayListExtra("LISTA",lista as ArrayList<String>)
+                    putExtra("LISTA",lista)
+
+                lista.forEach{
+                    putExtra("nombre${it}",it.name)
+                }
+                for (i in 0..lista.size){
+                    putExtra("nombre${i}", lista[i])
+                }
+*/
+
+
+//                //for (i in 0..15) {
+                putExtra("nombre", lista[0].name)
+                putExtra("edad", lista[0].age)
+                putExtra("cita", lista[0].cita)
+                putExtra("hospital", lista[0].hospital)
+                putExtra("cita2", lista[0].cita2)
+                putExtra("hospital2", lista[0].hospital2)
+
+            }
+
             startActivity(intent)
+
         }
         recyclerView.adapter = adapter
-
 
 
     }
