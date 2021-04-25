@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="NOMBRE "
+            android:textSize="14dp"
             android:backgroundTint="#212C73"/>
 
         <Space
@@ -58,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="Primera citación "
+            android:textSize="14dp"
             android:backgroundTint="#212C73"/>
 
         <Space
@@ -80,6 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="HOSPITAL "
+            android:textSize="14dp"
             android:backgroundTint="#212C73"/>
 
         <Space
@@ -102,6 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="Segunda citación "
+            android:textSize="14dp"
             android:backgroundTint="#212C73"/>
 
         <Space
@@ -124,6 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="HOSPITAL "
+            android:textSize="14dp"
             android:backgroundTint="#212C73"/>
 
 
