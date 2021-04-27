@@ -74,7 +74,7 @@ class HomeActivity : AppCompatActivity() {
 
             //actualizar BBDD
             FirebaseAuth.getInstance().signOut()
-            onBackPressed()
+            finish()
 
         }
 

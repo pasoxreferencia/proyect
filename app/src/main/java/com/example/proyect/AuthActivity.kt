@@ -21,9 +21,8 @@ class AuthActivity : AppCompatActivity() {
         // Setup
         setup()
     }
-
     private fun setup() {
-        title = "REGISTRAR O ENTRAR "
+        title = "Registrar o hacer login "
         binding.signUpButton.setOnClickListener {
             if (binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty()) {
 
@@ -39,16 +38,12 @@ class AuthActivity : AppCompatActivity() {
                         } else {
                             showAlert()
                         }
-
                     }
-
 
             } else {
                 showAlert2()
             }
-
         }
-
         binding.loginButton.setOnClickListener {
 
             if (binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty()) {
@@ -60,18 +55,14 @@ class AuthActivity : AppCompatActivity() {
                     ).addOnCompleteListener {
 
                         if (it.isSuccessful) {
-
                             showHome(it.result?.user?.email ?: "", ProviderType.CORREO)
                         } else {
                             showAlert()
                         }
-
                     }
-
             } else {
                 showAlert2()
             }
-
         }
     }
 
@@ -97,14 +88,9 @@ class AuthActivity : AppCompatActivity() {
 
     private fun showHome(email: String, provider: ProviderType) {
 
-
-
         val homeIntent = Intent(this, HomeActivity::class.java).apply {
             putExtra("email", email)
             putExtra("provider", provider.name)
-
-
-
         }
         startActivity(homeIntent)
     }
